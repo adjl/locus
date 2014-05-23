@@ -19,11 +19,12 @@ class Room {
 
   void draw() {
     pushMatrix();
+    rectMode(CENTER);
     stroke(#FFFFFF);
     strokeWeight(2);
     noFill();
-    translate(0, -height / 2, 0);
-    box(width, height, depth);
+    rotateX(HALF_PI);
+    rect(0, 0, width, depth);
     popMatrix();
   }
 }
