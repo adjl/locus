@@ -6,14 +6,16 @@ class DownwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(0, beamType.velocity(), 0);
     acceleration = new PVector(0, beamType.acceleration(), 0);
-    angle = PI;
+    rotationX = 0;
+    rotationZ = PI;
   }
 
   DownwardsBeam(BeamType beamType, float originX, float originY, float originZ, int colourID) {
     super(beamType, originX, originY, originZ, colourID);
     velocity = new PVector(0, beamType.velocity(), 0);
     acceleration = new PVector(0, beamType.acceleration(), 0);
-    angle = PI;
+    rotationX = 0;
+    rotationZ = PI;
   }
 
   boolean isGone(Platform platform) {

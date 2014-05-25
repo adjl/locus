@@ -6,14 +6,16 @@ class LeftwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(-beamType.velocity(), 0, 0);
     acceleration = new PVector(-beamType.acceleration(), 0, 0);
-    angle = PI + HALF_PI;
+    rotationX = 0;
+    rotationZ = PI + HALF_PI;
   }
 
   LeftwardsBeam(BeamType beamType, float originX, float originY, float originZ, int colourID) {
     super(beamType, originX, originY, originZ, colourID);
     velocity = new PVector(-beamType.velocity(), 0, 0);
     acceleration = new PVector(-beamType.acceleration(), 0, 0);
-    angle = PI + HALF_PI;
+    rotationX = 0;
+    rotationZ = PI + HALF_PI;
   }
 
   boolean isGone(Platform platform) {
