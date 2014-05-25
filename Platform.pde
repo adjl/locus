@@ -10,6 +10,18 @@ class Platform {
     this.depth = depth;
   }
 
+  float width() {
+    return width;
+  }
+
+  float height() {
+    return height;
+  }
+
+  float depth() {
+    return depth;
+  }
+
   boolean contains(PVector position) {
     // Platform boundaries seem to be uneven, hence the magic numbers
     return (position.x >= -(width - 2) / 2) && (position.x < (width - 1) / 2) &&
