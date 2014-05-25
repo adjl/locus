@@ -1,23 +1,23 @@
 class UpwardsBeam extends Beam {
 
-  UpwardsBeam(BeamType beamType) {
+  UpwardsBeam(BeamType beamType, Platform platform) {
     super(beamType);
-    origin = new PVector(int(random(width)), height - 1);
-    position = new PVector(origin.x, origin.y);
-    velocity = new PVector(0, -beamType.velocity());
-    acceleration = new PVector(0, -beamType.acceleration());
+    origin = new PVector(int(random(platform.width())), 0, int(random(platform.depth())));
+    position = new PVector(origin.x, origin.y, origin.z);
+    velocity = new PVector(0, -beamType.velocity(), 0);
+    acceleration = new PVector(0, -beamType.acceleration(), 0);
     angle = 0;
   }
 
-  UpwardsBeam(BeamType beamType, float originX, float originY, int colourID) {
-    super(beamType, originX, originY, colourID);
-    velocity = new PVector(0, -beamType.velocity());
-    acceleration = new PVector(0, -beamType.acceleration());
+  UpwardsBeam(BeamType beamType, float originX, float originY, float originZ, int colourID) {
+    super(beamType, originX, originY, originZ, colourID);
+    velocity = new PVector(0, -beamType.velocity(), 0);
+    acceleration = new PVector(0, -beamType.acceleration(), 0);
     angle = 0;
   }
 
-  boolean isGone() {
-    return position.y + length * size < 0;
+  boolean isGone(Platform platform) {
+    return position.y + length * size <= -platform.height();
   }
 
   void move() {
@@ -28,6 +28,6 @@ class UpwardsBeam extends Beam {
   }
 
   void draw() {
-    drawBeam(position.x - size * 0.5, position.y - size * 0.5);
+    drawBeam(position.x - size * 0.5, position.y - size * 0.5, position.z - size * 0.5);
   }
 }
