@@ -1,22 +1,22 @@
 class LeftwardsBeam extends Beam {
 
-  LeftwardsBeam(BeamType beamType) {
+  LeftwardsBeam(BeamType beamType, Platform platform) {
     super(beamType);
-    origin = new PVector(width - 1, int(random(height)));
-    position = new PVector(origin.x, origin.y);
-    velocity = new PVector(-beamType.velocity(), 0);
-    acceleration = new PVector(-beamType.acceleration(), 0);
+    origin = new PVector(platform.width() - 1, -int(random(platform.height())), int(random(platform.depth())));
+    position = new PVector(origin.x, origin.y, origin.z);
+    velocity = new PVector(-beamType.velocity(), 0, 0);
+    acceleration = new PVector(-beamType.acceleration(), 0, 0);
     angle = PI + HALF_PI;
   }
 
-  LeftwardsBeam(BeamType beamType, float originX, float originY, int colourID) {
-    super(beamType, originX, originY, colourID);
-    velocity = new PVector(-beamType.velocity(), 0);
-    acceleration = new PVector(-beamType.acceleration(), 0);
+  LeftwardsBeam(BeamType beamType, float originX, float originY, float originZ, int colourID) {
+    super(beamType, originX, originY, originZ, colourID);
+    velocity = new PVector(-beamType.velocity(), 0, 0);
+    acceleration = new PVector(-beamType.acceleration(), 0, 0);
     angle = PI + HALF_PI;
   }
 
-  boolean isGone() {
+  boolean isGone(Platform platform) {
     return position.x + length * size < 0;
   }
 
@@ -28,6 +28,6 @@ class LeftwardsBeam extends Beam {
   }
 
   void draw() {
-    drawBeam(position.x - size * 0.5, position.y + size * 0.5);
+    drawBeam(position.x - size * 0.5, position.y + size * 0.5, position.z + size * 0.5);
   }
 }
