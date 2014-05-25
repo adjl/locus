@@ -8,6 +8,8 @@ final float platformDepth = 200;
 Mouse mouse;
 Camera camera;
 Platform platform;
+Nexus nexus;
+boolean isRunning;
 
 void setup() {
   size(width, height, P3D);
@@ -15,6 +17,8 @@ void setup() {
   mouse = new Mouse();
   camera = new Camera(mouse, cameraHeight);
   platform = new Platform(platformWidth, platformHeight, platformDepth);
+  nexus = new Nexus(platform);
+  isRunning = true;
 }
 
 void draw() {
@@ -23,6 +27,8 @@ void draw() {
   else mouse.centre();
   camera.set();
   platform.draw();
+  if (isRunning) nexus.update();
+  nexus.draw();
 }
 
 void keyPressed() {
@@ -46,6 +52,9 @@ void keyPressed() {
       if (platform.contains(camera.rightPosition())) {
         camera.strafeRight();
       }
+      break;
+    case 'p': // Pause/resume
+      isRunning = !isRunning;
       break;
     case 'q': // Quit
       exit();
