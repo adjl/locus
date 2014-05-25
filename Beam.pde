@@ -10,7 +10,8 @@ abstract class Beam {
   final color[] colours = {red, green, blue, yellow, cyan, magenta};
 
   PVector origin, position, velocity, acceleration;
-  float terminalVelocity, angle, length, opacity, size;
+  float terminalVelocity, rotationX, rotationZ;
+  float length, opacity, size;
   color colour;
 
   Beam(BeamType beamType) {
@@ -34,7 +35,8 @@ abstract class Beam {
     pushMatrix();
     noStroke();
     translate(positionX, positionY, positionZ);
-    rotate(angle);
+    rotateX(rotationX);
+    rotateZ(rotationZ);
     scale(size);
     beginShape(QUADS);
     fill(colour, opacity); // Body
