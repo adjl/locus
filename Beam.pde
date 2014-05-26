@@ -11,12 +11,11 @@ abstract class Beam {
 
   PVector origin, position, velocity, acceleration;
   float terminalVelocity, rotationX, rotationZ;
-  float length, opacity, size;
+  float length, size;
   color colour;
 
   Beam(BeamType beamType) {
     terminalVelocity = beamType.terminalVelocity();
-    opacity = beamType.opacity();
     size = beamType.size();
     colour = colours[int(random(colours.length))];
   }
@@ -25,13 +24,12 @@ abstract class Beam {
     origin = new PVector(originX, originY, originZ);
     position = new PVector(originX, originY, originZ);
     terminalVelocity = beamType.terminalVelocity();
-    opacity = beamType.opacity();
     size = beamType.size();
     colour = colours[colourID];
   }
 
   void drawBeam(float positionX, float positionY, float positionZ) {
-    float tailOpacity = map(maxLength - length, 0, maxLength, 0, opacity);
+    float opacity = map(maxLength - length, 0, maxLength, 0, 255);
     pushMatrix();
     noStroke();
     translate(positionX, positionY, positionZ);
@@ -39,18 +37,12 @@ abstract class Beam {
     rotateZ(rotationZ);
     scale(size);
     beginShape(QUADS);
-    fill(colour, opacity); // Body
+    fill(colour); // Body
     vertex(0, 0);
     vertex(1, 0);
-    fill(colour, tailOpacity); // Tail
+    fill(colour, opacity); // Tail
     vertex(1, length);
     vertex(0, length);
-    fill(colour, opacity * 2); // Head
-    vertex(0, 0);
-    vertex(1, 0);
-    fill(colour, 0);
-    vertex(1, 1);
-    vertex(0, 1);
     endShape(CLOSE);
     popMatrix();
   }
