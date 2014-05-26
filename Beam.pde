@@ -31,18 +31,16 @@ abstract class Beam {
   void drawBeam(float positionX, float positionY, float positionZ) {
     float opacity = map(maxLength - length, 0, maxLength, 0, 255);
     pushMatrix();
-    noStroke();
+    strokeWeight(1);
     translate(positionX, positionY, positionZ);
     rotateX(rotationX);
     rotateZ(rotationZ);
     scale(size);
-    beginShape(QUADS);
-    fill(colour); // Body
-    vertex(0, 0);
-    vertex(1, 0);
-    fill(colour, opacity); // Tail
-    vertex(1, length);
-    vertex(0, length);
+    beginShape(LINES);
+    stroke(colour);
+    vertex(0, 0, 0);
+    stroke(colour, opacity);
+    vertex(0, length, 0);
     endShape(CLOSE);
     popMatrix();
   }
