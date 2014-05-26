@@ -35,7 +35,7 @@ abstract class Beam {
     translate(positionX, positionY, positionZ);
     rotateX(rotationX);
     rotateZ(rotationZ);
-    scale(size);
+    scale(1, size, 1);
     beginShape(LINES);
     stroke(colour);
     vertex(0, 0, 0);
