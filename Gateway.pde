@@ -1,9 +1,9 @@
 final int width = 1366;
 final int height = 768;
 final float cameraHeight = 50;
-final float platformWidth = 200;
-final float platformHeight = 100;
-final float platformDepth = 200;
+final float platformWidth = 2000;
+final float platformHeight = 2000;
+final float platformDepth = 2000;
 
 Mouse mouse;
 Camera camera;
