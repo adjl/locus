@@ -20,7 +20,7 @@ class Camera {
     fovy = HALF_PI * 3 / 4;
     aspect = 4 / 3.075;
     zNear = 0.1;
-    zFar = 1000;
+    zFar = 10000;
     speed = 2.0;
     perspective(fovy, aspect, zNear, zFar);
   }
