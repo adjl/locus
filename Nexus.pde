@@ -1,6 +1,6 @@
 class Nexus {
 
-  final int chanceOfFiring = 20; // 1 in 20
+  final int chanceOfFiring = 1; // 1 in chanceOfFiring
 
   Platform platform;
   ArrayList<Beam> beams;
