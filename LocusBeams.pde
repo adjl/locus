@@ -1,4 +1,4 @@
-class Nexus {
+class LocusBeams {
 
   final int chanceOfFiring = 1; // 1 in chanceOfFiring
 
@@ -6,7 +6,7 @@ class Nexus {
   ArrayList<Beam> beams;
   IntList colours;
 
-  Nexus(Platform platform) {
+  LocusBeams(Platform platform) {
     this.platform = platform;
     beams = new ArrayList<Beam>();
     colours = new IntList();

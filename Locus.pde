@@ -8,7 +8,7 @@ final float platformDepth = 2000;
 Mouse mouse;
 Camera camera;
 Platform platform;
-Nexus nexus;
+LocusBeams beams;
 boolean isRunning;
 
 void setup() {
@@ -17,7 +17,7 @@ void setup() {
   mouse = new Mouse();
   camera = new Camera(mouse, cameraHeight);
   platform = new Platform(platformWidth, platformHeight, platformDepth);
-  nexus = new Nexus(platform);
+  beams = new LocusBeams(platform);
   isRunning = true;
 }
 
@@ -27,8 +27,8 @@ void draw() {
   else mouse.centre();
   camera.set();
   platform.draw();
-  if (isRunning) nexus.update();
-  nexus.draw();
+  if (isRunning) beams.update();
+  beams.draw();
 }
 
 void keyPressed() {
