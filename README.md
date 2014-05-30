@@ -4,11 +4,11 @@ Locus n. A center or focus of great activity or intense concentration. A 3D vers
 ![Locus screenshot](https://github.com/adjl/Locus/raw/master/img/locus.png)
 
 ## Controls
-`w` - Move forward
-`a` - Strafe left
-`s` - Move backward
-`d` - Strafe right
-`p` - Pause/resume
+`w` - Move forward  
+`a` - Strafe left  
+`s` - Move backward  
+`d` - Strafe right  
+`p` - Pause/resume  
 `q` - Quit
 
 Move the cursor to look around.
