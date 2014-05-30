@@ -1,5 +1,7 @@
 # Locus
-Locus n. A center or focus of great activity or intense concentration. A 3D version of [Nexus](https://github.com/adjl/Nexus). Sit back and enjoy the light show.
+Locus n. A center or focus of great activity or intense concentration. A 3D version of [Nexus](https://github.com/adjl/Nexus).
+
+Sit back and enjoy the light show.
 
 ![Locus screenshot](https://github.com/adjl/Locus/raw/master/img/locus.png)
 
