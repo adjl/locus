@@ -36,7 +36,7 @@ There are a number of settings you can change to your tastes (and to obtain inte
   - `size` (defaults: 5, 7, 9)
 
 ## Remark
-This turned out quite nicely; I'm satisfied with the result.
+This turned out nicely; I'm satisfied with the result.
 
 ## License
 [MIT License](https://github.com/adjl/Locus/raw/master/LICENSE)
