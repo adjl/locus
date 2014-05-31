@@ -49,6 +49,17 @@ void keyPressed() {
         camera.strafeRight();
       }
       break;
+    case 'r': // Fly up
+      if (platform.contains(camera.upPosition())) {
+        camera.flyUp();
+      }
+      break;
+    case 'f': // Fly down
+      PVector position = camera.downPosition();
+      if (platform.contains(position) && camera.aboveHeight(position)) {
+        camera.flyDown();
+      }
+      break;
     case 'p': // Pause/resume
       isRunning = !isRunning;
       break;
