@@ -10,6 +10,8 @@ Sit back and enjoy the light show.
 `a` - Strafe left  
 `s` - Move backward  
 `d` - Strafe right  
+`r` - Fly up  
+`f` - Fly down  
 `p` - Pause/resume  
 `q` - Quit
 
