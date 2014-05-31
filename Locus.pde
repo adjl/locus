@@ -5,7 +5,6 @@ final float platformWidth = 2000;
 final float platformHeight = 2000;
 final float platformDepth = 2000;
 
-Mouse mouse;
 Camera camera;
 Platform platform;
 LocusBeams beams;
@@ -14,8 +13,7 @@ boolean isRunning;
 void setup() {
   size(width, height, P3D);
   noCursor();
-  mouse = new Mouse();
-  camera = new Camera(mouse, cameraHeight);
+  camera = new Camera(cameraHeight);
   platform = new Platform(platformWidth, platformHeight, platformDepth);
   beams = new LocusBeams(platform);
   isRunning = true;
@@ -23,8 +21,6 @@ void setup() {
 
 void draw() {
   background(#000000);
-  if (mouse.centred()) mouse.move();
-  else mouse.centre();
   camera.set();
   platform.draw();
   if (isRunning) beams.update();
