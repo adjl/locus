@@ -35,13 +35,6 @@ class LocusBeams {
     popMatrix();
   }
 
-  void createTouchBeams(int touchX, int touchY, int touchZ) {
-    Beam[] touchBeams = newTouchBeams(touchX, touchY, touchZ);
-    for (int i = 0; i < touchBeams.length; i++) {
-      beams.add(touchBeams[i]);
-    }
-  }
-
   Beam newBeam() {
     Beam beam = null;
     int direction = int(random(6)); // Number of directions
@@ -66,19 +59,6 @@ class LocusBeams {
         break;
     }
     return beam;
-  }
-
-  Beam[] newTouchBeams(int touchX, int touchY, int touchZ) {
-    BeamType beamType = randomBeamType();
-    colours.shuffle();
-    return new Beam[] {
-      new UpwardsBeam(beamType, touchX, touchY, touchZ, colours.get(0)),
-      new DownwardsBeam(beamType, touchX, touchY, touchZ, colours.get(1)),
-      new LeftwardsBeam(beamType, touchX, touchY, touchZ, colours.get(2)),
-      new RightwardsBeam(beamType, touchX, touchY, touchZ, colours.get(3)),
-      new ForwardsBeam(beamType, touchX, touchY, touchZ, colours.get(4)),
-      new BackwardsBeam(beamType, touchX, touchY, touchZ, colours.get(5))
-    };
   }
 
   BeamType randomBeamType() {
