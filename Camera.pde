@@ -8,20 +8,18 @@ class Camera {
   PVector centre;
   PVector up;
   PVector angle;
-  float minY;
   float speed;
   float fovy;
   float aspect;
   float zNear;
   float zFar;
 
-  Camera(float height) {
+  Camera() {
     mouse = new Mouse();
-    eye = new PVector(0, height, 0);
-    centre = new PVector(0, height, -1);
+    eye = new PVector(0, 0, 0);
+    centre = new PVector(0, 0, -1);
     up = new PVector(0, 1, 0);
     angle = new PVector();
-    minY = height;
     speed = 2.0;
     fovy = HALF_PI * 3 / 4;
     aspect = 4 / 3.075;
@@ -31,83 +29,101 @@ class Camera {
   }
 
   boolean aboveHeight(PVector position) {
-    return position.y >= minY;
+    return position.y >= 0;
+  }
+
+  PVector forwardDistance() {
+    return new PVector(-sin(angle.x) * speed, 0, cos(angle.x) * speed);
+  }
+
+  PVector backwardDistance() {
+    return new PVector(sin(angle.x) * speed, 0, -cos(angle.x) * speed);
+  }
+
+  PVector leftDistance() {
+    return new PVector(sin(angle.x + HALF_PI) * speed, 0, -cos(angle.x + HALF_PI) * speed);
+  }
+
+  PVector rightDistance() {
+    return new PVector(-sin(angle.x + HALF_PI) * speed, 0, cos(angle.x + HALF_PI) * speed);
+  }
+
+  PVector upDistance() {
+    return new PVector(0, speed, 0);
+  }
+
+  PVector downDistance() {
+    return new PVector(0, -speed, 0);
   }
 
   PVector forwardPosition() {
-    PVector distance = new PVector(-sin(angle.x) * speed, 0, cos(angle.x) * speed);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(forwardDistance());
     return position;
   }
 
   PVector backwardPosition() {
-    PVector distance = new PVector(sin(angle.x) * speed, 0, -cos(angle.x) * speed);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(backwardDistance());
     return position;
   }
 
   PVector leftPosition() {
-    PVector distance = new PVector(sin(angle.x + HALF_PI) * speed, 0, -cos(angle.x + HALF_PI) * speed);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(leftDistance());
     return position;
   }
 
   PVector rightPosition() {
-    PVector distance = new PVector(-sin(angle.x + HALF_PI) * speed, 0, cos(angle.x + HALF_PI) * speed);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(rightDistance());
     return position;
   }
 
   PVector upPosition() {
-    PVector distance = new PVector(0, speed, 0);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(upDistance());
     return position;
   }
 
   PVector downPosition() {
-    PVector distance = new PVector(0, -speed, 0);
     PVector position = eye.get();
-    position.add(distance);
+    position.add(downDistance());
     return position;
   }
 
   void moveForward() {
-    PVector distance = new PVector(-sin(angle.x) * speed, 0, cos(angle.x) * speed);
+    PVector distance = forwardDistance();
     eye.add(distance);
     centre.add(distance);
   }
 
   void moveBackward() {
-    PVector distance = new PVector(sin(angle.x) * speed, 0, -cos(angle.x) * speed);
+    PVector distance = backwardDistance();
     eye.add(distance);
     centre.add(distance);
   }
 
   void strafeLeft() {
-    PVector distance = new PVector(sin(angle.x + HALF_PI) * speed, 0, -cos(angle.x + HALF_PI) * speed);
+    PVector distance = leftDistance();
     eye.add(distance);
     centre.add(distance);
   }
 
   void strafeRight() {
-    PVector distance = new PVector(-sin(angle.x + HALF_PI) * speed, 0, cos(angle.x + HALF_PI) * speed);
+    PVector distance = rightDistance();
     eye.add(distance);
     centre.add(distance);
   }
 
   void flyUp() {
-    PVector distance = new PVector(0, speed, 0);
+    PVector distance = upDistance();
     eye.add(distance);
     centre.add(distance);
   }
 
   void flyDown() {
-    PVector distance = new PVector(0, -speed, 0);
+    PVector distance = downDistance();
     eye.add(distance);
     centre.add(distance);
   }

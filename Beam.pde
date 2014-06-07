@@ -1,13 +1,7 @@
 abstract class Beam {
 
-  final float maxLength = 25;
-  final color red = color(255, 0, 0);
-  final color green = color(0, 255, 0);
-  final color blue = color(0, 0, 255);
-  final color yellow = color(255, 255, 0);
-  final color cyan = color(0, 255, 255);
-  final color magenta = color(255, 0, 255);
-  final color[] colours = {red, green, blue, yellow, cyan, magenta};
+  final float maxLength = 25.0f;
+  final color[] colours = {#FF0000, #00FF00, #0000FF, #FFFF00, #00FFFF, #FF00FF};
 
   PVector origin, position, velocity, acceleration;
   float terminalVelocity, rotationX, rotationZ;
@@ -20,19 +14,17 @@ abstract class Beam {
     colour = colours[int(random(colours.length))];
   }
 
-  Beam(BeamType beamType, float originX, float originY, float originZ, int colourID) {
-    origin = new PVector(originX, originY, originZ);
-    position = new PVector(originX, originY, originZ);
-    terminalVelocity = beamType.terminalVelocity();
-    size = beamType.size();
-    colour = colours[colourID];
+  void moveBeam() {
+    velocity.add(acceleration);
+    velocity.limit(terminalVelocity);
+    position.add(velocity);
   }
 
-  void drawBeam(float positionX, float positionY, float positionZ) {
+  void draw() {
     float opacity = map(maxLength - length, 0, maxLength, 0, 255);
     pushMatrix();
     strokeWeight(1);
-    translate(positionX, positionY, positionZ);
+    translate(position.x, position.y, position.z);
     rotateX(rotationX);
     rotateZ(rotationZ);
     scale(1, size, 1);
@@ -45,7 +37,6 @@ abstract class Beam {
     popMatrix();
   }
 
-  abstract boolean isGone(Platform platform);
+  abstract boolean isGone(World world);
   abstract void move();
-  abstract void draw();
 }

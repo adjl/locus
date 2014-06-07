@@ -1,8 +1,8 @@
 enum BeamType {
 
-  SLOW(1f, 0.1f, 3f, 5f),
-  NORMAL(2f, 0.2f, 6f, 7f),
-  FAST(3f, 0.3f, 9f, 9f);
+  SLOW(1.0f, 0.1f, 3.0f, 5.0f),
+  NORMAL(2.0f, 0.2f, 6.0f, 7.0f),
+  FAST(3.0f, 0.3f, 9.0f, 9.0f);
 
   final float velocity;
   final float acceleration;
