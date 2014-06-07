@@ -3,6 +3,7 @@ final int height = 768;
 final float worldWidth = 2000.0f;
 final float worldHeight = 2000.0f;
 final float worldDepth = 2000.0f;
+final float cameraHeight = 50.0f;
 
 World world;
 LocusBeams beams;
@@ -14,7 +15,7 @@ void setup() {
   noCursor();
   world = new World(worldWidth, worldHeight, worldDepth);
   beams = new LocusBeams(world);
-  camera = new Camera();
+  camera = new Camera(cameraHeight);
   running = true;
 }
 

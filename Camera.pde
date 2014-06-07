@@ -8,18 +8,20 @@ class Camera {
   PVector centre;
   PVector up;
   PVector angle;
+  float minY;
   float speed;
   float fovy;
   float aspect;
   float zNear;
   float zFar;
 
-  Camera() {
+  Camera(float height) {
     mouse = new Mouse();
-    eye = new PVector(0, 0, 0);
-    centre = new PVector(0, 0, -1);
+    eye = new PVector(0, height, 0);
+    centre = new PVector(0, height, -1);
     up = new PVector(0, 1, 0);
     angle = new PVector();
+    minY = height;
     speed = 2.0;
     fovy = HALF_PI * 3 / 4;
     aspect = 4 / 3.075;
@@ -29,7 +31,7 @@ class Camera {
   }
 
   boolean aboveHeight(PVector position) {
-    return position.y >= 0;
+    return position.y >= minY;
   }
 
   PVector forwardDistance() {
