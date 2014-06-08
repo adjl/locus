@@ -6,7 +6,7 @@ class LeftwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(-beamType.velocity(), 0, 0);
     acceleration = new PVector(-beamType.acceleration(), 0, 0);
-    rotationX = 0;
+    rotationX = 0.0f;
     rotationZ = PI + HALF_PI;
   }
 

@@ -22,11 +22,11 @@ class Camera {
     up = new PVector(0, 1, 0);
     angle = new PVector();
     minY = height;
-    speed = 3.0;
+    speed = 3.0f;
     fovy = HALF_PI * 3 / 4;
     aspect = 4 / 3.075;
-    zNear = 0.1;
-    zFar = 10000;
+    zNear = 0.1f;
+    zFar = 10000f;
     perspective(fovy, aspect, zNear, zFar);
   }
 

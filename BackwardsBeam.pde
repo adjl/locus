@@ -7,7 +7,7 @@ class BackwardsBeam extends Beam {
     velocity = new PVector(0, 0, beamType.velocity());
     acceleration = new PVector(0, 0, beamType.acceleration());
     rotationX = PI + HALF_PI;
-    rotationZ = 0;
+    rotationZ = 0.0f;
   }
 
   boolean isGone(World world) {
