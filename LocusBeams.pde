@@ -25,8 +25,8 @@ class LocusBeams {
 
   void draw() {
     pushMatrix();
+    translate(world.width() / 2, 0, world.depth() / 2);
     rotateY(PI);
-    translate(-world.width() / 2, 0, -world.depth() / 2);
     for (Beam beam : beams) {
       beam.draw();
     }
