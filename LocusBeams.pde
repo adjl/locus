@@ -16,7 +16,11 @@ class LocusBeams {
   }
 
   void update() {
-    if (int(random(chanceOfFiring)) == 0) beams.add(newBeam());
+    if (int(random(chanceOfFiring)) == 0) {
+      for (int i = 0; i < 3; i++) {
+        beams.add(newBeam());
+      }
+    }
     for (int i = beams.size() - 1; i >= 0; i--) {
       beams.get(i).move();
       if (beams.get(i).isGone(world)) beams.remove(i);
