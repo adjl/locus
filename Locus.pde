@@ -1,9 +1,16 @@
-final int width = 1366;
-final int height = 768;
-final float worldWidth = 2000.0f;
-final float worldHeight = 2000.0f;
-final float worldDepth = 2000.0f;
-final float cameraHeight = 50.0f;
+final int WIDTH = 1366;
+final int HEIGHT = 768;
+final int BEAM_CHANCE_OF_FIRING = 1; // 1 in 1 (Always)
+final int COLOURS_COUNT = 6; // Number of colours
+final float WORLD_WIDTH = 2000.0;
+final float WORLD_HEIGHT = 2000.0;
+final float WORLD_DEPTH = 2000.0;
+final float CAMERA_HEIGHT = 50.0;
+final float CAMERA_SPEED = 3.0;
+final float BEAM_MAX_LENGTH = 25.0;
+final color[] COLOURS = {
+  #FF0000, #00FF00, #0000FF, #00FFFF, #FF00FF, #FFFF00
+};
 
 World world;
 LocusBeams beams;
@@ -11,60 +18,24 @@ Camera camera;
 boolean running;
 
 void setup() {
-  size(width, height, P3D);
+  size(WIDTH, HEIGHT, P3D);
   noCursor();
-  world = new World(worldWidth, worldHeight, worldDepth);
+  world = new World(WORLD_WIDTH, WORLD_HEIGHT, WORLD_DEPTH);
   beams = new LocusBeams(world);
-  camera = new Camera(cameraHeight);
+  camera = new Camera(CAMERA_HEIGHT, CAMERA_SPEED);
   running = true;
 }
 
 void draw() {
   background(#000000);
   world.draw();
-  if (running) beams.update();
+  if (running) {
+    beams.update();
+  }
   beams.draw();
   camera.set();
 }
 
 void keyPressed() {
-  switch (key) {
-    case 'w': // Move forward
-      if (world.contains(camera.forwardPosition())) {
-        camera.moveForward();
-      }
-      break;
-    case 'a': // Strafe left
-      if (world.contains(camera.leftPosition())) {
-        camera.strafeLeft();
-      }
-      break;
-    case 's': // Move backward
-      if (world.contains(camera.backwardPosition())) {
-        camera.moveBackward();
-      }
-      break;
-    case 'd': // Strafe right
-      if (world.contains(camera.rightPosition())) {
-        camera.strafeRight();
-      }
-      break;
-    case 'r': // Fly up
-      if (world.contains(camera.upPosition())) {
-        camera.flyUp();
-      }
-      break;
-    case 'f': // Fly down
-      PVector position = camera.downPosition();
-      if (world.contains(position) && camera.aboveHeight(position)) {
-        camera.flyDown();
-      }
-      break;
-    case 'p': // Pause/resume
-      running = !running;
-      break;
-    case 'q': // Quit
-      exit();
-      break;
-  }
+  camera.moveDirection(world, key);
 }

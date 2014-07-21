@@ -7,7 +7,7 @@ class BackwardsBeam extends Beam {
     velocity = new PVector(0, 0, beamType.velocity());
     acceleration = new PVector(0, 0, beamType.acceleration());
     rotationX = PI + HALF_PI;
-    rotationZ = 0.0f;
+    rotationZ = 0.0;
   }
 
   boolean isGone(World world) {
@@ -16,6 +16,6 @@ class BackwardsBeam extends Beam {
 
   void move() {
     moveBeam();
-    length = min((position.z - origin.z) / size + 1, maxLength);
+    length = min((position.z - origin.z) / size + 1, BEAM_MAX_LENGTH);
   }
 }

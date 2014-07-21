@@ -1,7 +1,5 @@
 class LocusBeams {
 
-  final int chanceOfFiring = 1; // Always
-
   World world;
   ArrayList<Beam> beams;
   IntList colours;
@@ -10,20 +8,20 @@ class LocusBeams {
     this.world = world;
     beams = new ArrayList<Beam>();
     colours = new IntList();
-    for (int i = 0; i < 6; i++) { // Number of colours
+    for (int i = 0; i < COLOURS_COUNT; i++) {
       colours.append(i);
     }
   }
 
   void update() {
-    if (int(random(chanceOfFiring)) == 0) {
-      for (int i = 0; i < 3; i++) {
-        beams.add(newBeam());
-      }
+    if (int(random(BEAM_CHANCE_OF_FIRING)) == 0) {
+      beams.add(newBeam());
     }
     for (int i = beams.size() - 1; i >= 0; i--) {
       beams.get(i).move();
-      if (beams.get(i).isGone(world)) beams.remove(i);
+      if (beams.get(i).isGone(world)) {
+        beams.remove(i);
+      }
     }
   }
 

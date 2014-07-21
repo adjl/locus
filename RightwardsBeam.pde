@@ -6,7 +6,7 @@ class RightwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(beamType.velocity(), 0, 0);
     acceleration = new PVector(beamType.acceleration(), 0, 0);
-    rotationX = 0.0f;
+    rotationX = 0.0;
     rotationZ = HALF_PI;
   }
 
@@ -16,6 +16,6 @@ class RightwardsBeam extends Beam {
 
   void move() {
     moveBeam();
-    length = min((position.x - origin.x) / size + 1, maxLength);
+    length = min((position.x - origin.x) / size + 1, BEAM_MAX_LENGTH);
   }
 }

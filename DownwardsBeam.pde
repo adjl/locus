@@ -6,7 +6,7 @@ class DownwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(0, beamType.velocity(), 0);
     acceleration = new PVector(0, beamType.acceleration(), 0);
-    rotationX = 0.0f;
+    rotationX = 0.0;
     rotationZ = PI;
   }
 
@@ -16,6 +16,6 @@ class DownwardsBeam extends Beam {
 
   void move() {
     moveBeam();
-    length = min((position.y - origin.y) / size + 1, maxLength);
+    length = min((position.y - origin.y) / size + 1, BEAM_MAX_LENGTH);
   }
 }

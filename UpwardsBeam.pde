@@ -6,8 +6,8 @@ class UpwardsBeam extends Beam {
     position = new PVector(origin.x, origin.y, origin.z);
     velocity = new PVector(0, -beamType.velocity(), 0);
     acceleration = new PVector(0, -beamType.acceleration(), 0);
-    rotationX = 0.0f;
-    rotationZ = 0.0f;
+    rotationX = 0.0;
+    rotationZ = 0.0;
   }
 
   boolean isGone(World world) {
@@ -16,6 +16,6 @@ class UpwardsBeam extends Beam {
 
   void move() {
     moveBeam();
-    length = min((origin.y - position.y) / size + 1, maxLength);
+    length = min((origin.y - position.y) / size + 1, BEAM_MAX_LENGTH);
   }
 }
