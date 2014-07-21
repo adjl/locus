@@ -29,6 +29,13 @@ class World {
   }
 
   void draw() {
+    fill(#000000);
+    noStroke();
+    pushMatrix();
+    translate(0, -height / 2, 0);
+    box(width, height, depth);
+    popMatrix();
+
     rectMode(CENTER);
     stroke(#FFFFFF);
     strokeWeight(2);
