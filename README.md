@@ -18,24 +18,21 @@ Sit back and enjoy the light show.
 Move the cursor to look around.
 
 ## Settings
-There are a number of settings you can change to your tastes (and to obtain interesting effects):
-- [`Locus.pde`](https://github.com/adjl/Locus/raw/master/Locus.pde)
-  - `width` (default: 1366)
-  - `height` (default: 768)
-  - `worldWidth` (default: 2000.0f)
-  - `worldHeight` (default: 2000.0f)
-  - `worldDepth` (default: 2000.0f)
-  - `cameraHeight` (default: 50.0f)
-- [`LocusBeams.pde`](https://github.com/adjl/Locus/raw/master/LocusBeams.pde)
-  - `chanceOfFiring` (default: 1)
-- [`Beam.pde`](https://github.com/adjl/Locus/raw/master/Beam.pde)
-  - `maxLength` (default: 25.0f)
-  - `colours` (default: red, green, blue, yellow, cyan, magenta)
-- [`BeamType.java`](https://github.com/adjl/Locus/raw/master/BeamType.java)
-  - `velocity` (defaults: 1.0f, 2.0f, 3.0f)
-  - `acceleration` (defaults: 0.1f, 0.2f, 0.3f)
-  - `terminalVelocity` (defaults: 3.0f, 6.0f, 9.0f)
-  - `size` (defaults: 5.0f, 7.0f, 9.0f)
+Modify the following in [`Locus.pde`](https://github.com/adjl/Locus/raw/master/Locus.pde) to your preferences:
+
+- `WIDTH` (default: 1366)
+- `HEIGHT` (default: 768)
+- `BEAM_CHANCE_OF_FIRING` (default: 1)
+  - 1 in 1 (always)
+- `COLOURS_COUNT` (default: 6)
+  - Number of colours
+- `WORLD_WIDTH` (default: 2000.0)
+- `WORLD_HEIGHT` (default: 2000.0)
+- `WORLD_DEPTH` (default: 2000.0)
+- `CAMERA_HEIGHT` (default: 50.0)
+- `CAMERA_SPEED` (default: 3.0)
+- `BEAM_MAX_LENGTH` (default: 25.0)
+- `COLOURS` (default: red, green, blue, cyan, magenta, yellow)
 
 ## Remark
 This turned out nicely; I'm satisfied with the result.
