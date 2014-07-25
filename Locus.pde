@@ -1,5 +1,3 @@
-final int WIDTH = 1366;
-final int HEIGHT = 768;
 final int BEAM_CHANCE_OF_FIRING = 1; // 1 in 1 (always)
 final int COLOURS_COUNT = 6; // Number of colours
 final float WORLD_WIDTH = 2000.0;
@@ -18,7 +16,7 @@ Camera camera;
 boolean running;
 
 void setup() {
-  size(WIDTH, HEIGHT, P3D);
+  size(displayWidth, displayHeight, P3D);
   noCursor();
   world = new World(WORLD_WIDTH, WORLD_HEIGHT, WORLD_DEPTH);
   beams = new LocusBeams(world);
