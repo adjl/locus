@@ -1,13 +1,17 @@
 package com.adjl.locus;
 
-import java.awt.AWTException;
-import java.awt.Robot;
+import com.adjl.virtualcamera.VirtualCamera;
+import com.adjl.virtualcamera.VirtualWorld;
+
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.data.IntList;
 
+/**
+ * @author Helena Josol
+ */
 public class Locus extends PApplet {
 
     final int BEAM_CHANCE_OF_FIRING = 1; // 1 in 1 (always)
@@ -23,7 +27,7 @@ public class Locus extends PApplet {
 
     World world;
     LocusBeams beams;
-    Camera camera;
+    VirtualCamera camera;
     boolean running;
 
     @Override
@@ -32,7 +36,7 @@ public class Locus extends PApplet {
         noCursor();
         world = new World(WORLD_WIDTH, WORLD_HEIGHT, WORLD_DEPTH);
         beams = new LocusBeams(world);
-        camera = new Camera(CAMERA_HEIGHT, CAMERA_SPEED);
+        camera = new VirtualCamera(this, world, CAMERA_HEIGHT, CAMERA_SPEED);
         running = true;
     }
 
@@ -49,236 +53,10 @@ public class Locus extends PApplet {
 
     @Override
     public void keyPressed() {
-        camera.moveDirection(world, key);
+        camera.move(key);
     }
 
-    class Camera {
-
-        Mouse mouse;
-        PVector eye;
-        PVector centre;
-        PVector up;
-        PVector angle;
-        float minY;
-        float speed;
-        float fovy;
-        float aspect;
-        float zNear;
-        float zFar;
-
-        Camera(float minY, float speed) {
-            mouse = new Mouse();
-            eye = new PVector(0, minY, 0);
-            centre = new PVector(0, minY, -1);
-            up = new PVector(0, 1, 0);
-            angle = new PVector();
-            this.minY = minY;
-            this.speed = speed;
-            fovy = HALF_PI * 3 / 4;
-            aspect = 4.0f / 3.075f;
-            zNear = 0.1f;
-            zFar = 10000;
-            perspective(fovy, aspect, zNear, zFar);
-        }
-
-        boolean aboveHeight(PVector position) {
-            return position.y >= minY;
-        }
-
-        PVector position(PVector direction) {
-            PVector position = eye.get();
-            position.add(direction);
-            return position;
-        }
-
-        void move(PVector direction) {
-            eye.add(direction);
-            centre.add(direction);
-        }
-
-        PVector forward() {
-            return new PVector(-sin(angle.x) * speed, 0, cos(angle.x) * speed);
-        }
-
-        PVector backward() {
-            return new PVector(sin(angle.x) * speed, 0, -cos(angle.x) * speed);
-        }
-
-        PVector left() {
-            return new PVector(sin(angle.x + HALF_PI) * speed, 0, -cos(angle.x + HALF_PI) * speed);
-        }
-
-        PVector right() {
-            return new PVector(-sin(angle.x + HALF_PI) * speed, 0, cos(angle.x + HALF_PI) * speed);
-        }
-
-        PVector up() {
-            return new PVector(0, speed, 0);
-        }
-
-        PVector down() {
-            return new PVector(0, -speed, 0);
-        }
-
-        PVector forwardPosition() {
-            return position(forward());
-        }
-
-        PVector backwardPosition() {
-            return position(backward());
-        }
-
-        PVector leftPosition() {
-            return position(left());
-        }
-
-        PVector rightPosition() {
-            return position(right());
-        }
-
-        PVector upPosition() {
-            return position(up());
-        }
-
-        PVector downPosition() {
-            return position(down());
-        }
-
-        void moveForward() {
-            move(forward());
-        }
-
-        void moveBackward() {
-            move(backward());
-        }
-
-        void strafeLeft() {
-            move(left());
-        }
-
-        void strafeRight() {
-            move(right());
-        }
-
-        void flyUp() {
-            move(up());
-        }
-
-        void flyDown() {
-            move(down());
-        }
-
-        void set() {
-            if (mouse.centred()) {
-                mouse.move();
-            } else {
-                mouse.centre();
-            }
-            angle.x = mouse.x() * TAU / (width - 1);
-            angle.y = mouse.y() * QUARTER_PI * 3 / (height - 1);
-            beginCamera();
-            camera(eye.x, eye.y, eye.z, centre.x, centre.y, centre.z, up.x, up.y, up.z);
-            translate(eye.x, eye.y, eye.z);
-            rotateX(angle.y);
-            rotateY(angle.x);
-            translate(centre.x, centre.y, centre.z);
-            endCamera();
-        }
-
-        void moveDirection(World world, char key) {
-            switch (key) {
-                case 'w': // Move forward
-                    if (world.contains(forwardPosition())) {
-                        moveForward();
-                    }
-                    break;
-                case 'a': // Strafe left
-                    if (world.contains(leftPosition())) {
-                        strafeLeft();
-                    }
-                    break;
-                case 's': // Move backward
-                    if (world.contains(backwardPosition())) {
-                        moveBackward();
-                    }
-                    break;
-                case 'd': // Strafe right
-                    if (world.contains(rightPosition())) {
-                        strafeRight();
-                    }
-                    break;
-                case 'r': // Fly up
-                    if (world.contains(upPosition())) {
-                        flyUp();
-                    }
-                    break;
-                case 'f': // Fly down
-                    PVector position = downPosition();
-                    if (world.contains(position) && aboveHeight(position)) {
-                        flyDown();
-                    }
-                    break;
-                case 'q': // Quit
-                    exit();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        class Mouse {
-
-            Robot robot;
-            boolean centred;
-            boolean wrapped;
-            int attempt;
-
-            Mouse() {
-                try {
-                    robot = new Robot();
-                } catch (AWTException e) {
-                    e.printStackTrace();
-                    exit();
-                }
-                centred = false;
-                wrapped = false;
-                attempt = 3;
-            }
-
-            boolean centred() {
-                return centred;
-            }
-
-            int x() {
-                return mouseX;
-            }
-
-            int y() {
-                return (height / 2) - mouseY;
-            }
-
-            void centre() {
-                robot.mouseMove(width / 2, height / 2);
-                if (--attempt == 0) { // Cursor centering works on the third centre() call
-                    centred = true;
-                }
-            }
-
-            void move() {
-                if (wrapped && mouseX > 0 && mouseX < width - 1) { // Wrap cursor horizontally
-                    wrapped = false;
-                } else if (!wrapped && mouseX == 0) {
-                    wrapped = true;
-                    robot.mouseMove(width - 1, mouseY);
-                } else if (!wrapped && mouseX == width - 1) {
-                    wrapped = true;
-                    robot.mouseMove(0, mouseY);
-                }
-            }
-        }
-    }
-
-    class World {
+    class World implements VirtualWorld {
 
         float width;
         float height;
@@ -294,28 +72,24 @@ public class Locus extends PApplet {
             return width;
         }
 
-        float height() {
-            return height;
-        }
-
         float depth() {
             return depth;
         }
 
-        boolean contains(PVector position) {
-            return (position.x >= -width / 2) && (position.x < width / 2) && (position.y >= 0)
-                    && (position.y < height) && (position.z >= -depth / 2)
-                    && (position.z < depth / 2);
+        @Override
+        public float getHeight() {
+            return height;
         }
 
-        void draw() {
-            fill(color(0, 0, 0));
-            noStroke();
-            pushMatrix();
-            translate(0, -height / 2, 0);
-            box(width, height, depth);
-            popMatrix();
+        @Override
+        public boolean isWithin(PVector position) {
+            return (position.x >= -width / 2.0f) && (position.x < width / 2.0f)
+                    && (position.y >= 0.0f) && (position.y < height)
+                    && (position.z >= -depth / 2.0f) && (position.z < depth / 2.0f);
+        }
 
+        @Override
+        public void draw() {
             rectMode(CENTER);
             stroke(color(255, 255, 255));
             strokeWeight(2);
@@ -475,7 +249,7 @@ public class Locus extends PApplet {
         ForwardsBeam(BeamType beamType, World world) {
             super(beamType);
             origin =
-                    new PVector((int) random(world.width()), (int) -random(world.height()),
+                    new PVector((int) random(world.width()), (int) -random(world.getHeight()),
                             world.depth() - 1);
             position = new PVector(origin.x, origin.y, origin.z);
             velocity = new PVector(0, 0, -beamType.velocity());
@@ -500,7 +274,7 @@ public class Locus extends PApplet {
 
         BackwardsBeam(BeamType beamType, World world) {
             super(beamType);
-            origin = new PVector((int) random(world.width()), (int) -random(world.height()), 0);
+            origin = new PVector((int) random(world.width()), (int) -random(world.getHeight()), 0);
             position = new PVector(origin.x, origin.y, origin.z);
             velocity = new PVector(0, 0, beamType.velocity());
             acceleration = new PVector(0, 0, beamType.acceleration());
@@ -525,7 +299,7 @@ public class Locus extends PApplet {
         LeftwardsBeam(BeamType beamType, World world) {
             super(beamType);
             origin =
-                    new PVector(world.width() - 1, (int) -random(world.height()),
+                    new PVector(world.width() - 1, (int) -random(world.getHeight()),
                             (int) random(world.depth()));
             position = new PVector(origin.x, origin.y, origin.z);
             velocity = new PVector(-beamType.velocity(), 0, 0);
@@ -550,7 +324,7 @@ public class Locus extends PApplet {
 
         RightwardsBeam(BeamType beamType, World world) {
             super(beamType);
-            origin = new PVector(0, (int) -random(world.height()), (int) random(world.depth()));
+            origin = new PVector(0, (int) -random(world.getHeight()), (int) random(world.depth()));
             position = new PVector(origin.x, origin.y, origin.z);
             velocity = new PVector(beamType.velocity(), 0, 0);
             acceleration = new PVector(beamType.acceleration(), 0, 0);
@@ -584,7 +358,7 @@ public class Locus extends PApplet {
 
         @Override
         boolean isGone(World world) {
-            return position.y + length * size <= -world.height();
+            return position.y + length * size <= -world.getHeight();
         }
 
         @Override
@@ -599,7 +373,7 @@ public class Locus extends PApplet {
         DownwardsBeam(BeamType beamType, World world) {
             super(beamType);
             origin =
-                    new PVector((int) random(world.width()), 1 - world.height(),
+                    new PVector((int) random(world.width()), 1 - world.getHeight(),
                             (int) random(world.depth()));
             position = new PVector(origin.x, origin.y, origin.z);
             velocity = new PVector(0, beamType.velocity(), 0);
