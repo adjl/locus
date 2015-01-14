@@ -1,25 +1,52 @@
 package com.adjl.locus;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
 
 class LocusBeams {
 
-    PApplet mSketch;
-    LocusWorld mWorld;
-    ArrayList<Beam> mBeams;
+    private final PApplet mSketch;
+    private final LocusWorld mWorld;
+    private final ArrayList<Beam> mBeams;
+    private final Random mRandom;
 
     LocusBeams(PApplet sketch, LocusWorld world) {
         mSketch = sketch;
         mWorld = world;
         mBeams = new ArrayList<>();
+        mRandom = new Random();
         BeamImpl.setSketch(mSketch);
     }
 
+    private Beam createRandomBeam() {
+        switch (mRandom.nextInt(6)) {
+            case 0: // Up
+                return new UpBeam(getRandomBeamType(), mWorld);
+            case 1: // Down
+                return new DownBeam(getRandomBeamType(), mWorld);
+            case 2: // Left
+                return new LeftBeam(getRandomBeamType(), mWorld);
+            case 3: // Right
+                return new RightBeam(getRandomBeamType(), mWorld);
+            case 4: // Forward
+                return new ForwardBeam(getRandomBeamType(), mWorld);
+            case 5: // Backward
+                return new BackwardBeam(getRandomBeamType(), mWorld);
+            default:
+                return null;
+        }
+    }
+
+    private BeamType getRandomBeamType() {
+        BeamType[] types = BeamType.values();
+        return types[mRandom.nextInt(types.length)];
+    }
+
     void update() {
-        mBeams.add(newBeam());
+        mBeams.add(createRandomBeam());
         for (int i = mBeams.size() - 1; i >= 0; i--) {
             mBeams.get(i).move();
             if (mBeams.get(i).isGone(mWorld)) {
@@ -36,37 +63,5 @@ class LocusBeams {
             beam.draw();
         }
         mSketch.popMatrix();
-    }
-
-    Beam newBeam() {
-        Beam beam = null;
-        int direction = (int) mSketch.random(6); // Number of directions
-        switch (direction) {
-            case 0: // Up
-                beam = new UpBeam(randomBeamType(), mWorld);
-                break;
-            case 1: // Down
-                beam = new DownBeam(randomBeamType(), mWorld);
-                break;
-            case 2: // Left
-                beam = new LeftBeam(randomBeamType(), mWorld);
-                break;
-            case 3: // Right
-                beam = new RightBeam(randomBeamType(), mWorld);
-                break;
-            case 4: // Forward
-                beam = new ForwardBeam(randomBeamType(), mWorld);
-                break;
-            case 5: // Backward
-                beam = new BackwardBeam(randomBeamType(), mWorld);
-                break;
-            default:
-                break;
-        }
-        return beam;
-    }
-
-    BeamType randomBeamType() {
-        return BeamType.values()[(int) mSketch.random(BeamType.values().length)];
     }
 }
