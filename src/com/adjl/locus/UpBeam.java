@@ -3,25 +3,21 @@ package com.adjl.locus;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-class UpwardsBeam extends BeamImpl implements Beam {
+class UpBeam extends BeamImpl implements Beam {
 
-    private final PVector mOrigin;
     private final PVector mPosition;
     private final PVector mVelocity;
     private final PVector mAcceleration;
-    private final float mRotationX;
-    private final float mRotationZ;
+    private final float mOriginY;
 
     private float mLength;
 
-    UpwardsBeam(PApplet sketch, BeamType type, LocusWorld world) {
+    UpBeam(PApplet sketch, BeamType type, LocusWorld world) {
         super(sketch, type);
-        mOrigin = new PVector(nextInt(world.getWidth()), 0.0f, nextInt(world.getDepth()));
-        mPosition = new PVector(mOrigin.x, mOrigin.y, mOrigin.z);
+        mPosition = new PVector(nextInt(world.getWidth()), 0.0f, nextInt(world.getDepth()));
         mVelocity = new PVector(0.0f, -type.getVelocity(), 0.0f);
         mAcceleration = new PVector(0.0f, -type.getAcceleration(), 0.0f);
-        mRotationX = 0.0f;
-        mRotationZ = 0.0f;
+        mOriginY = mPosition.y;
     }
 
     @Override
@@ -32,11 +28,11 @@ class UpwardsBeam extends BeamImpl implements Beam {
     @Override
     public void move() {
         move(mPosition, mVelocity, mAcceleration);
-        mLength = PApplet.min((mOrigin.y - mPosition.y) / getSize() + 1.0f, Beam.MAX_LENGTH);
+        mLength = PApplet.min((mOriginY - mPosition.y) / getSize() + 1.0f, Beam.MAX_LENGTH);
     }
 
     @Override
     public void draw() {
-        draw(mPosition, mRotationX, mRotationZ, mLength);
+        draw(mPosition, mLength, 0.0f, 0.0f);
     }
 }

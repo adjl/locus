@@ -16,8 +16,8 @@ abstract class BeamImpl {
         mTerminalVelocity = type.getTerminalVelocity();
         mSize = type.getSize();
         int[] COLOURS = { sketch.color(255, 0, 0), sketch.color(0, 255, 0),
-                sketch.color(0, 0, 255), sketch.color(0, 255, 255), sketch.color(255, 0, 255),
-                sketch.color(255, 255, 0) };
+            sketch.color(0, 0, 255), sketch.color(0, 255, 255), sketch.color(255, 0, 255),
+            sketch.color(255, 255, 0) };
         mColour = COLOURS[nextInt(COLOURS.length)];
     }
 
@@ -35,9 +35,8 @@ abstract class BeamImpl {
         position.add(velocity);
     }
 
-    void draw(PVector position, float rotationX, float rotationZ, float length) {
-        float opacity = PApplet.map(Beam.MAX_LENGTH - length, 0.0f, Beam.MAX_LENGTH,
-                0.0f, 255.0f);
+    void draw(PVector position, float length, float rotationX, float rotationZ) {
+        float opacity = PApplet.map(Beam.MAX_LENGTH - length, 0.0f, Beam.MAX_LENGTH, 0.0f, 255.0f);
         mSketch.strokeWeight(1.0f); // TODO(adjl): Use default stroke weight?
         mSketch.pushMatrix();
         mSketch.translate(position.x, position.y, position.z);
