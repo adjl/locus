@@ -12,8 +12,8 @@ class UpBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    UpBeam(PApplet sketch, BeamType type, LocusWorld world) {
-        super(sketch, type);
+    UpBeam(BeamType type, LocusWorld world) {
+        super(type);
         mPosition = new PVector(nextInt(world.getWidth()), 0.0f, nextInt(world.getDepth()));
         mVelocity = new PVector(0.0f, -type.getVelocity(), 0.0f);
         mAcceleration = new PVector(0.0f, -type.getAcceleration(), 0.0f);

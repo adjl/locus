@@ -15,6 +15,7 @@ class LocusBeams {
         mSketch = sketch;
         mWorld = world;
         mBeams = new ArrayList<>();
+        BeamImpl.setSketch(mSketch);
     }
 
     void update() {
@@ -42,22 +43,22 @@ class LocusBeams {
         int direction = (int) mSketch.random(6); // Number of directions
         switch (direction) {
             case 0: // Up
-                beam = new UpBeam(mSketch, randomBeamType(), mWorld);
+                beam = new UpBeam(randomBeamType(), mWorld);
                 break;
             case 1: // Down
-                beam = new DownBeam(mSketch, randomBeamType(), mWorld);
+                beam = new DownBeam(randomBeamType(), mWorld);
                 break;
             case 2: // Left
-                beam = new LeftBeam(mSketch, randomBeamType(), mWorld);
+                beam = new LeftBeam(randomBeamType(), mWorld);
                 break;
             case 3: // Right
-                beam = new RightBeam(mSketch, randomBeamType(), mWorld);
+                beam = new RightBeam(randomBeamType(), mWorld);
                 break;
             case 4: // Forward
-                beam = new ForwardBeam(mSketch, randomBeamType(), mWorld);
+                beam = new ForwardBeam(randomBeamType(), mWorld);
                 break;
             case 5: // Backward
-                beam = new BackwardBeam(mSketch, randomBeamType(), mWorld);
+                beam = new BackwardBeam(randomBeamType(), mWorld);
                 break;
             default:
                 break;

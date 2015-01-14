@@ -13,8 +13,8 @@ class DownBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    DownBeam(PApplet sketch, BeamType type, LocusWorld world) {
-        super(sketch, type);
+    DownBeam(BeamType type, LocusWorld world) {
+        super(type);
         mPosition = new PVector(nextInt(world.getWidth()), 1.0f - world.getHeight(),
                 nextInt(world.getDepth()));
         mVelocity = new PVector(0.0f, type.getVelocity(), 0.0f);

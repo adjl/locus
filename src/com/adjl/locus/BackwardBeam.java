@@ -13,8 +13,8 @@ class BackwardBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    BackwardBeam(PApplet sketch, BeamType type, LocusWorld world) {
-        super(sketch, type);
+    BackwardBeam(BeamType type, LocusWorld world) {
+        super(type);
         mPosition = new PVector(nextInt(world.getWidth()), -nextInt(world.getHeight()), 0.0f);
         mVelocity = new PVector(0.0f, 0.0f, type.getVelocity());
         mAcceleration = new PVector(0.0f, 0.0f, type.getAcceleration());

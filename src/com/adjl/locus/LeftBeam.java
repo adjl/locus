@@ -13,8 +13,8 @@ class LeftBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    LeftBeam(PApplet sketch, BeamType type, LocusWorld world) {
-        super(sketch, type);
+    LeftBeam(BeamType type, LocusWorld world) {
+        super(type);
         mPosition = new PVector(world.getWidth() - 1.0f, -nextInt(world.getHeight()),
                 nextInt(world.getDepth()));
         mVelocity = new PVector(-type.getVelocity(), 0.0f, 0.0f);
