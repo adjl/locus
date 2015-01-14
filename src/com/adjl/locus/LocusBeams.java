@@ -4,45 +4,34 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.data.IntList;
 
 class LocusBeams {
 
-    final int BEAM_CHANCE_OF_FIRING = 1; // 1 in 1 (always)
-    final int COLOURS_COUNT = 6; // Number of colours
-
     PApplet mSketch;
-    World mWorld;
-    ArrayList<Beam> beams;
-    IntList colours;
+    LocusWorld mWorld;
+    ArrayList<Beam> mBeams;
 
-    LocusBeams(PApplet sketch, World world) {
+    LocusBeams(PApplet sketch, LocusWorld world) {
         mSketch = sketch;
         mWorld = world;
-        beams = new ArrayList<>();
-        colours = new IntList();
-        for (int i = 0; i < COLOURS_COUNT; i++) {
-            colours.append(i);
-        }
+        mBeams = new ArrayList<>();
     }
 
     void update() {
-        if ((int) mSketch.random(BEAM_CHANCE_OF_FIRING) == 0) {
-            beams.add(newBeam());
-        }
-        for (int i = beams.size() - 1; i >= 0; i--) {
-            beams.get(i).move();
-            if (beams.get(i).isGone(mWorld)) {
-                beams.remove(i);
+        mBeams.add(newBeam());
+        for (int i = mBeams.size() - 1; i >= 0; i--) {
+            mBeams.get(i).move();
+            if (mBeams.get(i).isGone(mWorld)) {
+                mBeams.remove(i);
             }
         }
     }
 
     void draw() {
         mSketch.pushMatrix();
-        mSketch.translate(mWorld.width() / 2, 0, mWorld.depth() / 2);
+        mSketch.translate(mWorld.getWidth() / 2.0f, 0.0f, mWorld.getDepth() / 2.0f);
         mSketch.rotateY(PConstants.PI);
-        for (Beam beam : beams) {
+        for (Beam beam : mBeams) {
             beam.draw();
         }
         mSketch.popMatrix();

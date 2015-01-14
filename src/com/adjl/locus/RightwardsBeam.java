@@ -4,28 +4,40 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-class RightwardsBeam extends Beam {
+class RightwardsBeam extends BeamImpl implements Beam {
 
-    RightwardsBeam(PApplet sketch, BeamType beamType, World world) {
-        super(sketch, beamType);
-        origin =
-                new PVector(0, (int) -sketch.random(world.getHeight()), (int) sketch.random(world
-                        .depth()));
-        position = new PVector(origin.x, origin.y, origin.z);
-        velocity = new PVector(beamType.velocity(), 0, 0);
-        acceleration = new PVector(beamType.acceleration(), 0, 0);
-        rotationX = 0.0f;
-        rotationZ = PConstants.HALF_PI;
+    private final PVector mOrigin;
+    private final PVector mPosition;
+    private final PVector mVelocity;
+    private final PVector mAcceleration;
+    private final float mRotationX;
+    private final float mRotationZ;
+
+    private float mLength;
+
+    RightwardsBeam(PApplet sketch, BeamType type, LocusWorld world) {
+        super(sketch, type);
+        mOrigin = new PVector(0.0f, -nextInt(world.getHeight()), nextInt(world.getDepth()));
+        mPosition = new PVector(mOrigin.x, mOrigin.y, mOrigin.z);
+        mVelocity = new PVector(type.getVelocity(), 0.0f, 0.0f);
+        mAcceleration = new PVector(type.getAcceleration(), 0.0f, 0.0f);
+        mRotationX = 0.0f;
+        mRotationZ = PConstants.HALF_PI;
     }
 
     @Override
-    boolean isGone(World world) {
-        return position.x - length * size >= world.width();
+    public boolean isGone(LocusWorld world) {
+        return mPosition.x - mLength * getSize() >= world.getWidth();
     }
 
     @Override
-    void move() {
-        moveBeam();
-        length = PApplet.min((position.x - origin.x) / size + 1, BEAM_MAX_LENGTH);
+    public void move() {
+        move(mPosition, mVelocity, mAcceleration);
+        mLength = PApplet.min((mPosition.x - mOrigin.x) / getSize() + 1.0f, Beam.MAX_LENGTH);
+    }
+
+    @Override
+    public void draw() {
+        draw(mPosition, mRotationX, mRotationZ, mLength);
     }
 }

@@ -6,25 +6,27 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-class World implements VirtualWorld {
+class LocusWorld implements VirtualWorld {
 
-    PApplet mSketch;
-    float mWidth;
-    float mHeight;
-    float mDepth;
+    private final PApplet mSketch;
+    private final float mWidth;
+    private final float mHeight;
+    private final float mDepth;
+    private final int mStroke;
 
-    World(PApplet sketch, float width, float height, float depth) {
+    LocusWorld(PApplet sketch) {
         mSketch = sketch;
-        mWidth = width;
-        mHeight = height;
-        mDepth = depth;
+        mWidth = 2000.0f;
+        mHeight = 2000.0f;
+        mDepth = 2000.0f;
+        mStroke = mSketch.color(255, 255, 255);
     }
 
-    float width() {
+    float getWidth() {
         return mWidth;
     }
 
-    float depth() {
+    float getDepth() {
         return mDepth;
     }
 
@@ -42,10 +44,12 @@ class World implements VirtualWorld {
 
     @Override
     public void draw() {
-        mSketch.rectMode(PConstants.CENTER);
-        mSketch.stroke(mSketch.color(255, 255, 255));
-        mSketch.strokeWeight(2);
-        mSketch.noFill();
+        mSketch.noStroke();
+        mSketch.pushMatrix();
+        mSketch.translate(0.0f, -mHeight / 2.0f, 0.0f);
+        mSketch.box(mWidth, mHeight, mDepth);
+        mSketch.popMatrix(); // TODO(adjl): Nest push/pop matrices?
+        mSketch.stroke(mStroke);
         mSketch.pushMatrix();
         mSketch.rotateX(PConstants.HALF_PI);
         mSketch.rect(0, 0, mWidth, mDepth);
