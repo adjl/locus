@@ -15,11 +15,11 @@ class LocusBeams {
         mSketch = sketch;
         mWorld = world;
         mBeams = new ArrayList<>();
-        BeamFactory.setSketch(mSketch);
+        BeamFactory.setSketchAndWorld(mSketch, mWorld);
     }
 
     void update() {
-        mBeams.add(BeamFactory.createBeam(mWorld));
+        mBeams.add(BeamFactory.createBeam());
         for (int i = mBeams.size() - 1; i >= 0; i--) {
             mBeams.get(i).move();
             if (mBeams.get(i).isGone(mWorld)) {

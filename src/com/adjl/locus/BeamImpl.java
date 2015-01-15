@@ -11,6 +11,7 @@ abstract class BeamImpl {
     static final float MAX_LENGTH = 25.0f;
 
     private static PApplet sSketch;
+    private static LocusWorld sWorld;
     private static int[] sColours;
 
     private final float mTerminalVelocity;
@@ -23,11 +24,16 @@ abstract class BeamImpl {
         mColour = sColours[new Random().nextInt(sColours.length)];
     }
 
-    static void setSketch(PApplet sketch) {
+    static void setSketchAndWorld(PApplet sketch, LocusWorld world) {
         sSketch = sketch;
+        sWorld = world;
         sColours = new int[] { sSketch.color(255, 0, 0), sSketch.color(0, 255, 0),
             sSketch.color(0, 0, 255), sSketch.color(0, 255, 255), sSketch.color(255, 0, 255),
             sSketch.color(255, 255, 0) };
+    }
+
+    static LocusWorld getWorld() {
+        return sWorld;
     }
 
     static int nextInt(float bound) {

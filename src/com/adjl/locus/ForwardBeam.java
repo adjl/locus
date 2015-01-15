@@ -13,10 +13,10 @@ class ForwardBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    ForwardBeam(BeamType type, LocusWorld world) {
+    ForwardBeam(BeamType type) {
         super(type);
-        mPosition = new PVector(nextInt(world.getWidth()), -nextInt(world.getHeight()),
-                world.getDepth() - 1.0f);
+        mPosition = new PVector(nextInt(getWorld().getWidth()), -nextInt(getWorld().getHeight()),
+                getWorld().getDepth() - 1.0f);
         mVelocity = new PVector(0.0f, 0.0f, -type.getVelocity());
         mAcceleration = new PVector(0.0f, 0.0f, -type.getAcceleration());
         mOriginZ = mPosition.z;

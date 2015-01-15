@@ -17,24 +17,24 @@ class BeamFactory {
         return types[RANDOM.nextInt(types.length)];
     }
 
-    static void setSketch(PApplet sketch) {
-        BeamImpl.setSketch(sketch);
+    static void setSketchAndWorld(PApplet sketch, LocusWorld world) {
+        BeamImpl.setSketchAndWorld(sketch, world);
     }
 
-    static Beam createBeam(LocusWorld world) {
+    static Beam createBeam() {
         switch (RANDOM.nextInt(NUM_BEAMS)) {
             case 0:
-                return new UpBeam(getBeamType(), world);
+                return new UpBeam(getBeamType());
             case 1:
-                return new DownBeam(getBeamType(), world);
+                return new DownBeam(getBeamType());
             case 2:
-                return new LeftBeam(getBeamType(), world);
+                return new LeftBeam(getBeamType());
             case 3:
-                return new RightBeam(getBeamType(), world);
+                return new RightBeam(getBeamType());
             case 4:
-                return new ForwardBeam(getBeamType(), world);
+                return new ForwardBeam(getBeamType());
             case 5:
-                return new BackwardBeam(getBeamType(), world);
+                return new BackwardBeam(getBeamType());
             default:
                 return null;
         }

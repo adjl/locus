@@ -13,9 +13,10 @@ class RightBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    RightBeam(BeamType type, LocusWorld world) {
+    RightBeam(BeamType type) {
         super(type);
-        mPosition = new PVector(0.0f, -nextInt(world.getHeight()), nextInt(world.getDepth()));
+        mPosition = new PVector(0.0f, -nextInt(getWorld().getHeight()), nextInt(getWorld()
+                .getDepth()));
         mVelocity = new PVector(type.getVelocity(), 0.0f, 0.0f);
         mAcceleration = new PVector(type.getAcceleration(), 0.0f, 0.0f);
         mOriginX = mPosition.x;
