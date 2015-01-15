@@ -29,7 +29,7 @@ class RightBeam extends BeamImpl implements Beam {
     @Override
     public void move() {
         move(mPosition, mVelocity, mAcceleration);
-        mLength = PApplet.min((mPosition.x - mOriginX) / getSize() + 1.0f, Beam.MAX_LENGTH);
+        mLength = PApplet.min((mPosition.x - mOriginX) / getSize() + 1.0f, MAX_LENGTH);
     }
 
     @Override

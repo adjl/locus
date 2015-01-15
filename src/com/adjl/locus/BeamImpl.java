@@ -8,6 +8,8 @@ import processing.core.PVector;
 
 abstract class BeamImpl {
 
+    static final float MAX_LENGTH = 25.0f;
+
     private static PApplet sSketch;
     private static int[] sColours;
 
@@ -43,7 +45,7 @@ abstract class BeamImpl {
     }
 
     void draw(PVector position, float length, float rotationX, float rotationZ) {
-        float opacity = PApplet.map(Beam.MAX_LENGTH - length, 0.0f, Beam.MAX_LENGTH, 0.0f, 255.0f);
+        float opacity = PApplet.map(MAX_LENGTH - length, 0.0f, MAX_LENGTH, 0.0f, 255.0f);
         sSketch.pushMatrix();
         sSketch.translate(position.x, position.y, position.z);
         sSketch.rotateX(rotationX);

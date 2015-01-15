@@ -28,7 +28,7 @@ class UpBeam extends BeamImpl implements Beam {
     @Override
     public void move() {
         move(mPosition, mVelocity, mAcceleration);
-        mLength = PApplet.min((mOriginY - mPosition.y) / getSize() + 1.0f, Beam.MAX_LENGTH);
+        mLength = PApplet.min((mOriginY - mPosition.y) / getSize() + 1.0f, MAX_LENGTH);
     }
 
     @Override
