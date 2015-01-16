@@ -1,10 +1,12 @@
-package com.adjl.locus;
+package com.adjl.locus.beams;
+
+import com.adjl.locus.LocusWorld;
 
 import java.util.Random;
 
 import processing.core.PApplet;
 
-class BeamFactory {
+public class BeamFactory {
 
     private static final Random RANDOM = new Random();
     private static final int NUM_BEAMS = 6;
@@ -17,11 +19,11 @@ class BeamFactory {
         return types[RANDOM.nextInt(types.length)];
     }
 
-    static void setSketchAndWorld(PApplet sketch, LocusWorld world) {
+    public static void setSketchAndWorld(PApplet sketch, LocusWorld world) {
         BeamImpl.setSketchAndWorld(sketch, world);
     }
 
-    static Beam createBeam() {
+    public static Beam createBeam() {
         switch (RANDOM.nextInt(NUM_BEAMS)) {
             case 0:
                 return new UpBeam(getBeamType());

@@ -1,4 +1,4 @@
-package com.adjl.locus;
+package com.adjl.locus.beams;
 
 enum BeamType {
 

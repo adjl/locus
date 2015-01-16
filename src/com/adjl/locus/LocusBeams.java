@@ -1,5 +1,8 @@
 package com.adjl.locus;
 
+import com.adjl.locus.beams.Beam;
+import com.adjl.locus.beams.BeamFactory;
+
 import java.util.ArrayList;
 
 import processing.core.PApplet;

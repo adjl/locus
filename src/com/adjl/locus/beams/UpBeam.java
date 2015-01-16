@@ -1,4 +1,6 @@
-package com.adjl.locus;
+package com.adjl.locus.beams;
+
+import com.adjl.locus.LocusWorld;
 
 import processing.core.PApplet;
 import processing.core.PVector;

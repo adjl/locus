@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-class LocusWorld implements VirtualWorld {
+public class LocusWorld implements VirtualWorld {
 
     private final PApplet mSketch;
     private final float mWidth;
@@ -22,11 +22,11 @@ class LocusWorld implements VirtualWorld {
         mStroke = mSketch.color(255, 255, 255);
     }
 
-    float getWidth() {
+    public float getWidth() {
         return mWidth;
     }
 
-    float getDepth() {
+    public float getDepth() {
         return mDepth;
     }
 
@@ -48,11 +48,11 @@ class LocusWorld implements VirtualWorld {
         mSketch.pushMatrix();
         mSketch.translate(0.0f, -mHeight / 2.0f, 0.0f);
         mSketch.box(mWidth, mHeight, mDepth);
-        mSketch.popMatrix(); // TODO(adjl): Nest push/pop matrices?
+        mSketch.popMatrix();
         mSketch.stroke(mStroke);
         mSketch.pushMatrix();
         mSketch.rotateX(PConstants.HALF_PI);
-        mSketch.rect(0, 0, mWidth, mDepth);
+        mSketch.rect(0.0f, 0.0f, mWidth, mDepth);
         mSketch.popMatrix();
     }
 }
