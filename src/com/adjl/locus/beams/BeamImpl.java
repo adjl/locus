@@ -6,8 +6,6 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-import java.util.Random;
-
 abstract class BeamImpl {
 
     static final float MAX_LENGTH = 25.0f;
@@ -23,7 +21,7 @@ abstract class BeamImpl {
     BeamImpl(BeamType type) {
         mTerminalVelocity = type.getTerminalVelocity();
         mSize = type.getSize();
-        mColour = sColours[new Random().nextInt(sColours.length)];
+        mColour = sColours[BeamFactory.randomise(sColours.length)];
     }
 
     static void setSketchAndWorld(PApplet sketch, LocusWorld world) {

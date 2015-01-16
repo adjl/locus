@@ -1,14 +1,10 @@
 package com.adjl.locus.beams;
 
-import java.util.Random;
-
 enum BeamType {
 
     SLOW(1.0f, 0.1f, 3.0f, 5.0f),
     NORMAL(2.0f, 0.2f, 6.0f, 7.0f),
     FAST(3.0f, 0.3f, 9.0f, 9.0f);
-
-    private static final Random RANDOM = new Random();
 
     private final float mVelocity;
     private final float mAcceleration;
@@ -24,7 +20,7 @@ enum BeamType {
 
     static BeamType getBeamType() {
         BeamType[] types = BeamType.values();
-        return types[RANDOM.nextInt(types.length)];
+        return types[BeamFactory.randomise(types.length)];
     }
 
     float getVelocity() {
