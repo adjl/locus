@@ -5,27 +5,25 @@ import com.adjl.virtualcamera.VirtualCamera;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-/**
- * @author Helena Josol
- */
 public class Locus extends PApplet {
 
+    private final float mCameraHeight;
+    private final float mCameraSpeed;
+    private final float mStrokeWeight;
     private final int mBackground;
     private final int mFill;
-    private final int mStrokeWeight;
 
-    private LocusWorld mWorld;
     private LocusBeams mBeams;
+    private LocusWorld mWorld;
     private VirtualCamera mCamera;
     private boolean mRunning;
 
-    /**
-     * TODO(adjl): Write Javadoc.
-     */
     public Locus() {
+        mCameraHeight = 50.0f;
+        mCameraSpeed = 3.0f;
+        mStrokeWeight = 2.0f;
         mBackground = color(0, 0, 0);
         mFill = color(0, 0, 0);
-        mStrokeWeight = 2;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class Locus extends PApplet {
         strokeWeight(mStrokeWeight);
         mWorld = new LocusWorld(this);
         mBeams = new LocusBeams(this, mWorld);
-        mCamera = new VirtualCamera(this, mWorld, 50.0f, 3.0f);
+        mCamera = new VirtualCamera(this, mWorld, mCameraHeight, mCameraSpeed);
         mRunning = true;
     }
 
