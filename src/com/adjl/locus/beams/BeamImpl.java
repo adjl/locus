@@ -2,11 +2,11 @@ package com.adjl.locus.beams;
 
 import com.adjl.locus.LocusWorld;
 
-import java.util.Random;
-
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
+
+import java.util.Random;
 
 abstract class BeamImpl {
 
