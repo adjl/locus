@@ -15,7 +15,11 @@ class RightBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    RightBeam(BeamType type) {
+    RightBeam() {
+        this(BeamType.getBeamType());
+    }
+
+    private RightBeam(BeamType type) {
         super(type);
         mPosition = new PVector(0.0f, -nextInt(getWorld().getHeight()), nextInt(getWorld()
                 .getDepth()));

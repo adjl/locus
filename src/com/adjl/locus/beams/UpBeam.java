@@ -14,7 +14,11 @@ class UpBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    UpBeam(BeamType type) {
+    UpBeam() {
+        this(BeamType.getBeamType());
+    }
+
+    private UpBeam(BeamType type) {
         super(type);
         mPosition = new PVector(nextInt(getWorld().getWidth()), 0.0f,
                 nextInt(getWorld().getDepth()));

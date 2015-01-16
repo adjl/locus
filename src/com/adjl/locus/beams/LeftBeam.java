@@ -15,7 +15,11 @@ class LeftBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    LeftBeam(BeamType type) {
+    LeftBeam() {
+        this(BeamType.getBeamType());
+    }
+
+    private LeftBeam(BeamType type) {
         super(type);
         mPosition = new PVector(getWorld().getWidth() - 1.0f, -nextInt(getWorld().getHeight()),
                 nextInt(getWorld().getDepth()));

@@ -15,7 +15,11 @@ class BackwardBeam extends BeamImpl implements Beam {
 
     private float mLength;
 
-    BackwardBeam(BeamType type) {
+    BackwardBeam() {
+        this(BeamType.getBeamType());
+    }
+
+    private BackwardBeam(BeamType type) {
         super(type);
         mPosition = new PVector(nextInt(getWorld().getWidth()), -nextInt(getWorld().getHeight()),
                 0.0f);
