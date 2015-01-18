@@ -7,8 +7,6 @@ import processing.core.PConstants;
 
 public class Locus extends PApplet {
 
-    private final float mCameraHeight;
-    private final float mCameraSpeed;
     private final float mStrokeWeight;
     private final int mBackground;
     private final int mFill;
@@ -19,8 +17,6 @@ public class Locus extends PApplet {
     private boolean mRunning;
 
     public Locus() {
-        mCameraHeight = 50.0f;
-        mCameraSpeed = 3.0f;
         mStrokeWeight = 2.0f;
         mBackground = color(0, 0, 0);
         mFill = color(0, 0, 0);
@@ -33,9 +29,9 @@ public class Locus extends PApplet {
         noCursor();
         fill(mFill);
         strokeWeight(mStrokeWeight);
-        mWorld = new LocusWorld(this);
+        mWorld = new LocusWorld(this, 2000.0f, 2000.0f, 2000.0f);
+        mCamera = new VirtualCamera(this, mWorld, 50.0f, 5.0f);
         mBeams = new LocusBeams(this, mWorld);
-        mCamera = new VirtualCamera(this, mWorld, mCameraHeight, mCameraSpeed);
         mRunning = true;
     }
 

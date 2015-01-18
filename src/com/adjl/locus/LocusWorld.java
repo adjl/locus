@@ -1,12 +1,11 @@
 package com.adjl.locus;
 
-import com.adjl.virtualcamera.VirtualWorld;
+import com.adjl.virtualcamera.SimpleWorld;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.core.PVector;
 
-public class LocusWorld implements VirtualWorld {
+public class LocusWorld extends SimpleWorld {
 
     private final PApplet mSketch;
     private final float mWidth;
@@ -14,11 +13,12 @@ public class LocusWorld implements VirtualWorld {
     private final float mDepth;
     private final int mStroke;
 
-    LocusWorld(PApplet sketch) {
+    LocusWorld(PApplet sketch, float width, float height, float depth) {
+        super(sketch, width, height, depth);
         mSketch = sketch;
-        mWidth = 2000.0f;
-        mHeight = 2000.0f;
-        mDepth = 2000.0f;
+        mWidth = width;
+        mHeight = height;
+        mDepth = depth;
         mStroke = mSketch.color(255, 255, 255);
     }
 
@@ -28,18 +28,6 @@ public class LocusWorld implements VirtualWorld {
 
     public float getDepth() {
         return mDepth;
-    }
-
-    @Override
-    public float getHeight() {
-        return mHeight;
-    }
-
-    @Override
-    public boolean isWithin(PVector position) {
-        return (position.x >= -mWidth / 2.0f) && (position.x < mWidth / 2.0f)
-                && (position.y >= 0.0f) && (position.y < mHeight) && (position.z >= -mDepth / 2.0f)
-                && (position.z < mDepth / 2.0f);
     }
 
     @Override
