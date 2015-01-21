@@ -48,7 +48,11 @@ public class Locus extends PApplet {
 
     @Override
     public void keyPressed() {
-        mCamera.move(key);
+        if (key == 'p') {
+            mRunning = !mRunning;
+        } else {
+            mCamera.move(key);
+        }
     }
 
     public static void main(String[] args) {
