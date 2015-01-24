@@ -28,8 +28,8 @@ abstract class BeamImpl {
         sSketch = sketch;
         sWorld = world;
         sColours = new int[] { sSketch.color(255, 0, 0), sSketch.color(0, 255, 0),
-            sSketch.color(0, 0, 255), sSketch.color(0, 255, 255), sSketch.color(255, 0, 255),
-            sSketch.color(255, 255, 0) };
+                sSketch.color(0, 0, 255), sSketch.color(0, 255, 255), sSketch.color(255, 0, 255),
+                sSketch.color(255, 255, 0) };
     }
 
     static LocusWorld getWorld() {
