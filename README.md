@@ -3,14 +3,13 @@ Locus (n). Centre or focus of great activity or intense concentration. 3D versio
 
 Sit back and enjoy the light show.
 
-![Locus screenshot](https://github.com/adjl/Locus/raw/master/img/locus.png)
+![Locus screenshot](img/locus.png)
 
 ## Dependencies
-Dependencies used:
 - [VirtualCamera v1.1](https://github.com/adjl/VirtualCamera/tree/v1.1)
 
 ## Usage
-Run [`com.adjl.locus.Locus`](https://github.com/adjl/Locus/blob/master/src/com/adjl/locus/Locus.java).
+Run [`com.adjl.locus.Locus`](src/com/adjl/locus/Locus.java).
 
 ## Controls
 `w` - Move forward  
@@ -28,4 +27,4 @@ Move the pointer to look around.
 Found a bug, have a question, or suggestion for enhancement? Please [file an issue](https://github.com/adjl/Locus/issues).
 
 ## License
-[MIT License](https://github.com/adjl/Locus/blob/master/LICENSE)
+[MIT License](LICENSE)
