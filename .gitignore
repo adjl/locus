@@ -57,3 +57,4 @@ application.windows32
 application.windows64
 application.macosx
 
+!lib/base/core/*.jar
