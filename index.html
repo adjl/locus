@@ -8,6 +8,28 @@
   </head>
   <body>
     <a-scene>
+      <!-- Default A-Frame lighting -->
+      <a-light type="ambient" color="#BBB"></a-light>
+      <a-light position="-0.5 1 1" type="directional" intensity="0.6"></a-light>
+
+      <a-sphere position="-10 0.75 -10" scale="0.01 0.01 0.01" color="#0AF"
+          light="type: point; color: #0AF; decay: 1.0; distance: 1.0"
+          material="shader: flat">
+          <a-animation attribute="position"
+              repeat="indefinite"
+              to="10 0.75 10"
+              direction="alternate"
+              dur="10000"
+              easing="linear">
+          </a-animation>
+      </a-sphere>
+
+      <a-plane position="0 0.5 0" scale="10 10 1" rotation="-90 0 0"
+          color="#111" metalness="0.5" material></a-plane>
+      <a-sky color="#000"></a-sky>
+      <a-entity position="0 0 2">
+        <a-camera></a-camera>
+      </a-entity>
     </a-scene>
   </body>
 </html>
